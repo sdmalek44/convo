@@ -5,8 +5,8 @@ class MessagesController < ApplicationController
 
     if message.save
       serializer = MessageSerializer.new(message)
-      serialized_data = ActiveModelSerializer::Adapter::Json.new(serializer).serializable_hash
-      MessageChannel.broadcast_to conversation, serialized_data
+      serialized_data = ActiveModelSerializers::Adapter::Json.new(serializer).serializable_hash
+      MessagesChannel.broadcast_to conversation, serialized_data
       head :ok
     end
   end
